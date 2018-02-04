@@ -10,22 +10,30 @@ benford <- function(x, leemis, choGains){
   if(identical(leemis,TRUE) & identical(choGains,TRUE)){ #If the user inputs 'TRUE' for both Leemis and Cho Gains 
     m <- max((sigDigitTable/numTotals) - log10(1 + 1/as.numeric(labels(sigDigitTable)[[1]]))) #crux of the Leemis equation, follows the formula.  
     d <- sqrt(sum(((sigDigitTable/numTotals) - log10(1 + 1/as.numeric(labels(sigDigitTable)[[1]])))^2)) #crux of the leemis equation 
-    return(list("Lemmis' m statistic" = m, "Cho Gain's d" = d)) #Returns both values as a properly labeled list 
+    return(list("Lemmis' m statistic" = m, "Cho Gains' d" = d, "Significant Digit Distribution" = sigDigit)) #Returns both values as a properly labeled list 
   }
   if(identical(leemis,TRUE)){ #If the user only sets Leemis as true
     m <- max((sigDigitTable/numTotals) - log10(1 + 1/as.numeric(labels(sigDigitTable)[[1]])))   #leemis function again
-    return(list("Leemis' m statistic" = m)) #returns as a properly labeled list
+    return(list("Leemis' m statistic" = m, "Significant Digit Distribution" = sigDigit)) #returns as a properly labeled list
   }
   if(identical(choGains, TRUE)){ #if the user only sets Cho Gain as tue
     d <- sqrt(sum(((sigDigitTable/numTotals) - log10(1 + 1/as.numeric(labels(sigDigitTable)[[1]])))^2)) #Cho Gain again
-    return(list("Cho Gain's d" = d)) #returns as a properly labeled list
+    return(list("Cho Gains' d" = d, "Significant Digit Distribution" = sigDigit)) #returns as a properly labeled list
   }
   else{
-    return("You must pick either/or/both Leemis and Cho Gain to be TRUE")
+    return("You must pick either/or/both Leemis and Cho Gains to be TRUE")
   }
 }
 
-benford(voteTotals,FALSE,FALSE) #Test of function. It works!
+benford(voteTotals,TRUE,FALSE) #Test of function. It works!
+
+#2
 
 
 
+print.benfords <- function(leemis, choGains){
+  leemis <- asterisks(leemis)
+  choGain <- asterisks(choGains)
+  
+}
+paste(as.character(1352),"***", sep="")
