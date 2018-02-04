@@ -29,9 +29,51 @@ benford(voteTotals,TRUE,FALSE) #Test of function. It works!
 
 #2
 
-
+asterisks <- function(input, leemisOrChoGains){ #subordinate function to add asterisks to leemis and Cho Gains values. To assess via leemis, set leemisOrChoGains to TRUE. For Cho Gains, set leemisOrChoGains to FALSE. 
+  if(identical(leemisOrChoGains, TRUE)){
+    if(input >= 1.212){
+      return(paste(as.character(input),"***", sep=""))
+    }
+    if(input >= 0.967){
+      return(paste(as.character(input),"**", sep=""))
+    }
+    if(input >= 0.851){
+      return(paste(as.character(input),"*", sep=""))
+    }
+    if(input < 0.851){
+      return(as.character(input))
+    }
+    if(is.na(input)){
+      return(NA)
+    }
+  }
+  if(identical(leemisOrChoGains, FALSE)){
+    if(input >= 1.569){
+      return(paste(as.character(input),"***", sep=""))
+    }
+    if(input >= 1.330){
+      return(paste(as.character(input),"**", sep=""))
+    }
+    if(input >= 1.212){
+      return(paste(as.character(input),"*", sep=""))
+    }
+    if(input < 1.212){
+      return(as.character(input))
+    }
+    if(is.na(input)){
+      return(NA)
+    }
+  }
+}
 
 print.benfords <- function(leemis, choGains){
+  leemisValue <- asterisks(leemis, TRUE) #TRUE for leemis significance
+  choGainsValue <- asterisks(choGains, FALSE)  #FALSE for choGains significance
+ 
+  
+  
+  
+  
   leemis <- asterisks(leemis)
   choGain <- asterisks(choGains)
   
