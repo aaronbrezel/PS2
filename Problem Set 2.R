@@ -66,16 +66,25 @@ asterisks <- function(input, leemisOrChoGains){ #subordinate function to add ast
   }
 }
 
+install.packages("pander") #installs captioner package to help create tables
 print.benfords <- function(leemis, choGains){
+  library("pander", lib.loc="~/R/win-library/3.4") #activates the stargazer package 
   leemisValue <- asterisks(leemis, TRUE) #TRUE for leemis significance
   choGainsValue <- asterisks(choGains, FALSE)  #FALSE for choGains significance
- 
-  
-  
-  
-  
-  leemis <- asterisks(leemis)
-  choGain <- asterisks(choGains)
-  
+  matrix <- matrix(c(leemisValue,choGainsValue), ncol = 1) #create matrix of asterisk-ed values
+  table <- data.frame(matrix) #sticks matrix in a dataframe
+  rownames(table) <- c("Leemis' m", "Cho-Gains' d") #name rows 
+  colnames(table) <- "Calculated Value" #name columns
+  table <- pandoc.table(table, style = "grid", caption = "* = Significant at 0.10, ** = Significant at 0.05, *** = Significant at 0.01", plain.ascii= TRUE) #pander command to create table
+  return(table) #return pander table
+  detach("package:pander", unload=TRUE) #makes the package no longer usefull
 }
-paste(as.character(1352),"***", sep="")
+
+createCSV <- function(leemis, choGains){ #function to create csv
+  sink(file = "C:/Users/aaron/OneDrive/Documents/temp.csv", append = TRUE, split = FALSE) #creates file to write to
+  input <- print.benfords(leemis, choGains) #set output to write
+  sink(input) #write output to file
+}
+
+createCSV(0.8, 1.3) #test function
+
