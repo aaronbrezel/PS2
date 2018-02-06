@@ -66,7 +66,7 @@ asterisks <- function(input, leemisOrChoGains){ #subordinate function to add ast
   }
 }
 
-install.packages("pander") #installs captioner package to help create tables
+install.packages("pander") #installs pander package to help create tables
 print.benfords <- function(leemis, choGains){
   library("pander", lib.loc="~/R/win-library/3.4") #activates the stargazer package 
   leemisValue <- asterisks(leemis, TRUE) #TRUE for leemis significance
